@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Nosotros - Agro Full Ltda. {% endblock title %}
+
+{% block content %}
+
+<div class="grid-container" style="padding-top: 40px; padding-bottom: 40px;">
+
+  <!-- TITULO -->
+  <div class="text-center">
+    <h2 style="color: #2d572c; font-weight: bold;">
+      Sobre Nosotros
+    </h2>
+    <p style="font-size: 18px; margin-top: 10px;">
+      Conoce quiénes somos y cómo trabajamos en Agro Full Ltda.
+    </p>
+  </div>
+
+  <!-- SECCION 1 -->
+  <div class="grid-x grid-margin-x" style="margin-top: 40px;">
+    <div class="cell small-12 medium-6">
+      <img src="{% static 'img/10.jpg' %}" alt="Campo AgroFull" style="width: 100%; border-radius: 8px;">
+    </div>
+
+    <div class="cell small-12 medium-6" style="display: flex; align-items: center;">
+      <div>
+        <h3 style="color: #2d572c;">¿Quiénes somos?</h3>
+        <p>
+          Somos Agro Full Ltda., una empresa dedicada a ofrecer frutas y verduras 
+          frescas directamente desde productores locales, asegurando calidad,
+          rapidez y precios justos para nuestros clientes.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECCION 2 -->
+  <div class="grid-x grid-margin-x" style="margin-top: 40px;">
+    <div class="cell small-12 medium-6" style="display: flex; align-items: center;">
+      <div>
+        <h3 style="color: #2d572c;">Nuestra misión</h3>
+        <p>
+          Entregar productos frescos y saludables, optimizando cada paso del proceso 
+          de compra para que tu experiencia sea rápida, clara y confiable. 
+        </p>
+      </div>
+    </div>
+
+    <div class="cell small-12 medium-6">
+      <img src="{% static 'img/10.jpg' %}" alt="Productos frescos" style="width: 100%; border-radius: 8px;">
+    </div>
+  </div>
+
+  <!-- SECCION 3 -->
+  <div class="grid-x grid-margin-x" style="margin-top: 40px;">
+    <div class="cell small-12 medium-4">
+      <div style="background:#f6f6f6; padding:20px; border-radius:10px; text-align:center;">
+        <h4 style="color:#2d572c;">🌱 Calidad</h4>
+        <p>Seleccionamos los mejores productos para asegurar frescura y sabor.</p>
+      </div>
+    </div>
+
+    <div class="cell small-12 medium-4">
+      <div style="background:#f6f6f6; padding:20px; border-radius:10px; text-align:center;">
+        <h4 style="color:#2d572c;">🚚 Entregas rápidas</h4>
+        <p>Coordinamos envíos eficientes para que recibas tu pedido a tiempo.</p>
+      </div>
+    </div>
+
+    <div class="cell small-12 medium-4">
+      <div style="background:#f6f6f6; padding:20px; border-radius:10px; text-align:center;">
+        <h4 style="color:#2d572c;">🤝 Confianza</h4>
+        <p>Trabajamos de manera transparente, con atención cercana al cliente.</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+{% endblock content %}

@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Mi Perfil{% endblock %}
+
+{% block content %}
+<div class="grid-container" style="padding-top:40px; padding-bottom:60px; max-width:700px;">
+
+    <h2 class="text-center">👤 Mi Perfil</h2>
+
+    <p class="text-center" style="color:#555;">
+        Hola <strong>{{ request.user.first_name }}</strong>, aquí puedes gestionar tu cuenta.
+    </p>
+
+    <div class="grid-x grid-margin-x medium-up-2 large-up-2" style="margin-top:35px;">
+
+        <!-- Datos personales -->
+        <div class="cell">
+            <a href="#" class="button expanded primary" style="height:100px; font-size:18px;">
+                👤 Mis datos
+            </a>
+        </div>
+
+        <!-- Direcciones -->
+        <div class="cell">
+            <a href="{% url 'lista_direcciones' %}" class="button expanded success" style="height:100px; font-size:18px;">
+                📍 Mis direcciones
+            </a>
+        </div>
+
+        <!-- Pedidos -->
+        <div class="cell">
+            <a href="/pedidos/mios/" class="button expanded warning" style="height:100px; font-size:18px;">
+                🛒 Mis pedidos
+            </a>
+        </div>
+
+        <!-- Cerrar sesión -->
+        <div class="cell">
+            <a href="{% url 'logout' %}" class="button expanded alert" style="height:100px; font-size:18px;">
+                ❌ Cerrar sesión
+            </a>
+        </div>
+
+    </div>
+
+</div>
+{% endblock %}

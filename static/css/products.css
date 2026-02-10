@@ -1,0 +1,173 @@
+/* ---- TITULO PRINCIPAL (H1) ---- */
+.grid-container h1 {
+    font-size: 2.3rem;
+    font-weight: 700;
+    color: #2d572c;
+    text-align: center;
+    margin-bottom: 20px;
+    letter-spacing: -0.5px;
+}
+
+/* Línea decorativa moderna debajo de h1 */
+.grid-container h1::after {
+    content: "";
+    display: block;
+    width: 90px;
+    height: 4px;
+    background-color: #4CAF50;
+    margin: 10px auto;
+    border-radius: 3px;
+    opacity: 0.9;
+}
+
+/* ---- TITULO CATEGORIAS (H2) ---- */
+.grid-container h2 {
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: #3B6F3C;
+    text-align: center;
+    margin-top: 35px;
+    margin-bottom: 15px;
+    opacity: 0.95;
+}
+
+/* Línea elegante debajo de categoría */
+.grid-container h2::after {
+    content: "";
+    display: block;
+    width: 60px;
+    height: 3px;
+    background-color: #81c784;
+    margin: 6px auto;
+    border-radius: 4px;
+}
+
+/* ---- TARJETAS ---- */
+.card {
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    background-color: #fff;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+.sin-imagen {
+    width: 100%;
+    height: 180px;
+    background-color: #eee;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    color: #777;
+}
+
+/* ---- PRODUCTO ---- */
+.card-section h4 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #2d572c;
+    margin-bottom: 8px;
+    transition: 0.2s ease-in-out;
+}
+
+.card-section h4:hover {
+    color: #1b3f1a;
+}
+
+/* ---- BOTÓN ---- */
+.btn-agregar {
+    width: 100%;
+    padding: 8px 10px;
+    border: none;
+    border-radius: 6px;
+    background-color: #4CAF50;
+    color: white;
+    font-weight: 600;
+    font-size: 0.85rem;
+    transition: 0.3s;
+    cursor: not-allowed;
+}
+
+.btn-agregar:not([disabled]) {
+    cursor: pointer;
+}
+
+.btn-agregar:hover:not([disabled]) {
+    background-color: #2d572c;
+}
+
+/* ---- CATEGORÍAS (CHIPS) ---- */
+.categoria-bar {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    white-space: nowrap;
+    padding: 14px 18px;
+    background: #ffffff;
+    border-bottom: 2px solid #dee2e6;
+    width: 100%;
+    border-radius: 10px;
+    margin: 25px auto 15px auto;
+    max-width: 1200px;
+}
+
+/* Scroll */
+.categoria-bar::-webkit-scrollbar {
+    height: 6px;
+}
+
+.categoria-bar::-webkit-scrollbar-thumb {
+    background: #b5b5b5;
+    border-radius: 10px;
+}
+
+.categoria-pill {
+    padding: 9px 18px;
+    border-radius: 20px;
+    background: #e8f5e9;
+    color: #2d572c;
+    font-weight: 600;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 0.9rem;
+    text-decoration: none;
+}
+
+.categoria-pill:hover {
+    background: #c8e6c9;
+}
+
+.categoria-pill.active {
+    background: #4CAF50;
+    color: white;
+    border-color: #2d572c;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* ---- RESPONSIVE ---- */
+@media (max-width: 640px) {
+    .grid-container h1 {
+        font-size: 1.9rem;
+    }
+
+    .grid-container h2 {
+        font-size: 1.3rem;
+    }
+
+    .card img {
+        height: 150px;
+    }
+}

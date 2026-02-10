@@ -1,0 +1,51 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Dashboard | AgroFull{% endblock %}
+
+{% block content %}
+
+<h1 class="mt-4 mb-4">🌿 Panel de Gestión AgroFull</h1>
+
+<div class="row">
+    <!-- Card Productos -->
+    <div class="col-md-3">
+        <div class="card shadow text-center p-3">
+            <h3>📦 Productos</h3>
+            <p class="fs-4 fw-bold text-success">{{ productos_count }}</p>
+            <a href="#" class="btn btn-success btn-sm">Gestionar</a>
+        </div>
+    </div>
+
+    <!-- Card Pedidos -->
+    <div class="col-md-3">
+        <div class="card shadow text-center p-3">
+            <h3>🚚 Pedidos</h3>
+            <p class="fs-4 fw-bold text-primary">{{ pedidos_count }}</p>
+            <a href="#" class="btn btn-primary btn-sm">Ver pedidos</a>
+        </div>
+    </div>
+
+    <!-- Card Inventario -->
+    <div class="col-md-3">
+        <div class="card shadow text-center p-3">
+            <h3>📊 Inventario</h3>
+            <p class="fs-4 fw-bold text-warning">{{ inventario_count }}</p>
+            <a href="#" class="btn btn-warning btn-sm">Stock</a>
+        </div>
+    </div>
+
+    <!-- Card Clientes -->
+    <div class="col-md-3">
+        <div class="card shadow text-center p-3">
+            <h3>👥 Clientes</h3>
+            <p class="fs-4 fw-bold text-info">{{ clientes_count }}</p>
+            <a href="#" class="btn btn-info btn-sm text-white">Ver clientes</a>
+        </div>
+    </div>
+</div>
+
+<hr class="mt-5">
+
+<p class="text-muted text-center">© AgroFull 2025 — Sistema de gestión agrícola</p>
+
+{% endblock %}

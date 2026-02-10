@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>AgroFull</title>
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    body {
+        padding-top: 85px;
+    }
+
+    form p {
+        margin-bottom: 15px;
+    }
+
+    label {
+        font-weight: 600;
+    }
+
+    input, select, textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+    }
+
+    .btn-custom {
+        border-radius: 12px;
+        font-size: 1.1rem;
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-success fixed-top">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">AgroFull</a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+
+        <!-- Enlaces siempre visibles -->
+        <li class="nav-item"><a class="nav-link" href="/">Inicio</a></li>
+
+        <!-- Botón Productos -->
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'productos' %}">Productos</a>
+        </li>
+
+        <!-- Dropdown Categorías -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+            Categorías
+          </a>
+          <ul class="dropdown-menu">
+            {% for cat in categorias_global %}
+              <li><a class="dropdown-item" href="{% url 'categoria' cat.id %}">{{ cat.nombre }}</a></li>
+            {% empty %}
+              <li><small class="dropdown-item text-muted">No hay categorías</small></li>
+            {% endfor %}
+          </ul>
+        </li>
+
+        <!-- Carrito -->
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'carrito' %}">
+            🛒 Carrito <span class="badge bg-warning text-dark">{{ carrito_count }}</span>
+          </a>
+        </li>
+
+        <li class="nav-item"><a class="nav-link" href="#">Nosotros</a></li>
+
+        <!-- MENÚ USUARIO -->
+        {% if request.user.is_authenticated %}
+            {% if request.user.is_staff %}
+              <!-- Solo para admin -->
+              <li class="nav-item"><a class="nav-link" href="{% url 'dashboard' %}">Panel</a></li>
+            {% endif %}
+
+            <!-- Todos los usuarios logueados -->
+            <li class="nav-item"><a class="nav-link" href="{% url 'mi_cuenta' %}">Mi Cuenta</a></li>
+
+            <!-- Cerrar sesión -->
+            <li class="nav-item">
+              <form method="POST" action="{% url 'logout' %}" class="d-inline">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-warning btn-sm ms-2">
+                  🚪 Cerrar sesión
+                </button>
+              </form>
+            </li>
+        {% else %}
+            <!-- Usuarios no autenticados -->
+            <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Iniciar sesión</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'registro' %}">Registrarse</a></li>
+        {% endif %}
+
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+    {% block content %}{% endblock %}
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

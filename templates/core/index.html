@@ -1,0 +1,50 @@
+{% extends "core/base.html" %}
+
+{% block title %}Inicio | AgroFull{% endblock %}
+
+{% block content %}
+
+<header class="bg-light p-5 text-center">
+    <h1 class="display-4">Bienvenido a AgroFull 🍎🥕🥦</h1>
+    <p class="lead">Distribución rápida de frutas y verduras frescas para tu negocio.</p>
+
+    {% if not user.is_authenticated %}
+        <a href="{% url 'login' %}" class="btn btn-success btn-lg mt-3">Ingresar</a>
+    {% else %}
+        <a href="{% url 'dashboard' %}" class="btn btn-warning btn-lg mt-3">Ir al Panel</a>
+    {% endif %}
+</header>
+
+<section class="container mt-5">
+    <h2 class="text-center mb-4">¿Qué ofrecemos?</h2>
+    <div class="row">
+        <div class="col-md-4 mb-3">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h5 class="card-title">Productos Frescos</h5>
+                    <p>Calidad certificada directo desde productores locales.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h5 class="card-title">Entregas Rápidas</h5>
+                    <p>Rutas optimizadas y logística eficiente para tu negocio.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h5 class="card-title">Pedidos Online</h5>
+                    <p>Haz pedidos desde tu cuenta y revisa tu historial fácilmente.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Agro Full Ltda. - Inicio {% endblock title %}
+
+{% block full_width %}
+<!-- =========================
+     SLIDER PRINCIPAL FULL WIDTH
+========================= -->
+<div class="orbit" role="region" aria-label="Slider AgroFull" data-orbit>
+  <div class="orbit-wrapper">
+    
+    <div class="orbit-controls">
+      <button class="orbit-previous">&#9664;</button>
+      <button class="orbit-next">&#9654;</button>
+    </div>
+
+    <ul class="orbit-container">
+      <li class="is-active orbit-slide">
+        <figure class="orbit-figure">
+          <img class="orbit-image" src="{% static 'img/10.jpg' %}" alt="AgroFull">
+          <figcaption class="orbit-caption">Productos frescos a tu alcance</figcaption>
+        </figure>
+      </li>
+
+      <li class="orbit-slide">
+        <figure class="orbit-figure">
+          <img class="orbit-image" src="{% static 'img/10.jpg' %}" alt="AgroFull">
+          <figcaption class="orbit-caption">Calidad y rapidez en cada entrega</figcaption>
+        </figure>
+      </li>
+    </ul>
+  </div>
+</div>
+{% endblock full_width %}
+
+{% block content %}
+<!-- =========================
+     SECCIÓN BIENVENIDA
+========================= -->
+<div class="grid-x grid-padding-x align-center text-center" style="margin-top:40px;">
+  <div class="cell small-12 medium-8">
+    <h2 style="font-weight:bold;">Bienvenido(a) a Agro Full Ltda.</h2>
+    <p style="font-size:18px;">
+      Realiza tus pedidos de frutas y verduras de manera rápida, fácil y segura.
+    </p>
+
+    <a href="{% url 'lista_productos' %}" class="button large" 
+       style="background:#2d572c; border-radius:8px;">
+      Ver productos
+    </a>
+  </div>
+</div>
+
+<!-- =========================
+     SECCIÓN SERVICIOS (3 COLUMNAS)
+========================= -->
+<div class="grid-x grid-padding-x align-center text-center" style="margin-top:60px;">
+  
+  <div class="cell small-12 medium-4">
+    <img src="{% static 'img/icon_fresco.png' %}" alt="" style="width:80px;">
+    <h4 style="margin-top:15px;">Productos Frescos</h4>
+    <p>Trabajamos directamente con proveedores para ofrecer la mejor calidad.</p>
+  </div>
+
+  <div class="cell small-12 medium-4">
+    <img src="{% static 'img/icon_delivery.png' %}" alt="" style="width:80px;">
+    <h4 style="margin-top:15px;">Despacho Rápido</h4>
+    <p>Procesamos tu pedido y lo entregamos en el menor tiempo posible.</p>
+  </div>
+
+  <div class="cell small-12 medium-4">
+    <img src="{% static 'img/icon_seguro.png' %}" alt="" style="width:80px;">
+    <h4 style="margin-top:15px;">Compra Segura</h4>
+    <p>Tu información y tus pedidos están totalmente protegidos.</p>
+  </div>
+</div>
+
+<!-- =========================
+     SECCIÓN CTA (FONDO COLOR)
+========================= -->
+<div style="margin-top:60px; background:#f2f2f2; padding:40px 20px;">
+  <div class="grid-x grid-padding-x align-center text-center">
+    <div class="cell small-12 medium-8">
+      <h3 style="font-weight:bold;">Comienza a comprar ahora</h3>
+      <p>Explora nuestro catálogo y arma tu pedido fácilmente.</p>
+      <a href="{% url 'lista_productos' %}" class="button" 
+         style="background:#2d572c; border-radius:8px;">
+        Ver catálogo
+      </a>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

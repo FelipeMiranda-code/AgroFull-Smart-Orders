@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Eliminar Dirección{% endblock %}
+
+{% block content %}
+<div class="grid-container" style="max-width: 500px; padding-top: 60px; padding-bottom: 60px; text-align:center;">
+
+    <h4>⚠️ ¿Estás seguro de eliminar esta dirección?</h4>
+
+    <p><strong>{{ direccion.nombre }}</strong></p>
+    <p>{{ direccion.calle }} #{{ direccion.numero }}</p>
+    <p>{{ direccion.comuna }} - {{ direccion.ciudad }}</p>
+
+    {% if direccion.referencia %}
+        <p><em>{{ direccion.referencia }}</em></p>
+    {% endif %}
+
+    <form method="post" style="margin-top:25px;">
+        {% csrf_token %}
+        <button type="submit" class="button alert expanded">
+            🗑 Sí, eliminar
+        </button>
+    </form>
+
+    <a href="{% url 'lista_direcciones' %}" class="button secondary expanded" style="margin-top:10px;">
+        ❌ Cancelar
+    </a>
+
+</div>
+{% endblock %}

@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Resumen Diario{% endblock %}
+
+{% block head_extra %}
+<link rel="stylesheet" href="{% static 'css/products.css' %}">
+{% endblock head_extra %}
+
+{% block content %}
+<div class="grid-container" style="padding-top:20px; padding-bottom:40px;">
+
+    <!-- ✅ MIGA DE PAN -->
+    <div class="categoria-bar" style="margin-bottom:25px;">
+        <a href="{% url 'inicio' %}" class="categoria-pill">
+            Inicio
+        </a>
+
+        <span class="categoria-pill active">
+            📊 Resumen Diario
+        </span>
+    </div>
+
+    <!-- TÍTULO -->
+    <h2 class="text-center">📊 Resumen Diario - {{ hoy }}</h2>
+
+    <!-- ✅ TARJETAS RESUMEN -->
+    <div class="grid-x grid-margin-x small-up-1 medium-up-2" style="margin-top:25px;">
+
+        <div class="cell">
+            <div class="card">
+                <div class="card-section text-center">
+                    <h4>🛒 Total Pedidos</h4>
+                    <p style="font-size:32px; font-weight:bold;">
+                        {{ total_pedidos }}
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="cell">
+            <div class="card">
+                <div class="card-section text-center">
+                    <h4>⚖️ Total Kilos</h4>
+                    <p style="font-size:32px; font-weight:bold;">
+                        {{ total_kilos }}
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ✅ BOTÓN EXCEL -->
+    <div style="margin-top:25px;">
+        <a href="{% url 'generar_excel_diario' %}" class="button success large expanded">
+            📥 Descargar Excel del Día
+        </a>
+    </div>
+
+    <!-- ✅ TABLA DETALLE -->
+    <div style="margin-top:40px;">
+        <h4>📦 Detalle por producto</h4>
+
+        <table class="hover stack text-center">
+            <thead>
+                <tr>
+                    <th class="text-left">Producto</th>
+                    <th>Total Kilos</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for d in detalles %}
+                <tr>
+                    <td class="text-left">{{ d.producto__nombre }}</td>
+                    <td><strong>{{ d.total_producto }}</strong></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</div>
+{% endblock %}

@@ -1,0 +1,133 @@
+<div class="top-bar" style="background-color:#2d572c;">
+  <div class="top-bar-left">
+    <ul class="dropdown menu" data-dropdown-menu style="background-color:#2d572c;">
+
+      <!-- LOGO -->
+      <li class="menu-text" style="color:white; font-weight:bold;">
+        Agro Full Ltda.
+      </li>
+
+      <!-- INICIO -->
+      <li>
+        <a href="{% url 'inicio' %}" style="color:white;">Inicio</a>
+      </li>
+
+      <!-- PRODUCTOS -->
+      <li>
+        <a href="{% url 'lista_productos' %}" style="color:white;">Productos</a>
+        <ul class="menu vertical">
+          {% if categorias %}
+          {% for cat in categorias %}
+          <li>
+            <a href="{% url 'productos_por_categoria' cat.id %}">
+              {{ cat.nombre }}
+            </a>
+          </li>
+          {% endfor %}
+          {% endif %}
+        </ul>
+      </li>
+      <!-- NOSOTROS -->
+      <li>
+        <a href="{% url 'nosotros' %}" style="color:white;">Nosotros</a>
+      </li>
+
+      <!-- LINKS DINÁMICOS SEGÚN PÁGINA -->
+      {% if user.is_authenticated %}
+
+      {% if request.resolver_match.url_name == 'ver_pedido' %}
+      <li>
+        <a href="{% url 'mis_pedidos' %}" style="color:white;">
+          📦 Mis pedidos
+        </a>
+      </li>
+
+      {% elif request.resolver_match.url_name == 'mis_pedidos' %}
+      <li>
+        <a href="{% url 'ver_pedido' %}" style="color:white;">
+          🛒 Mi pedido
+        </a>
+      </li>
+
+      {% else %}
+      <li>
+        <a href="{% url 'ver_pedido' %}" style="color:white;">
+          🛒 Mi pedido
+        </a>
+      </li>
+      {% endif %}
+
+      <!-- ⭐ MIS DIRECCIONES (NUEVO) -->
+      <li>
+        <a href="{% url 'lista_direcciones' %}" style="color:white;">
+          🏠 Mis direcciones
+        </a>
+      </li>
+
+      {% endif %}
+
+
+      <!-- SOLO ADMIN -->
+      {% if user.is_staff %}
+      <li>
+        <a href="{% url 'resumen_diario' %}" style="color:#FFD700;">
+          📊 Resumen Diario
+        </a>
+      </li>
+      {% endif %}
+
+    </ul>
+  </div>
+
+  <!-- LADO DERECHO -->
+  <div class="top-bar-right">
+    <ul class="menu" style="background-color:#2d572c;">
+
+      <!-- BUSCADOR -->
+      <li>
+        <form method="GET" id="form-buscar" action="{% url 'lista_productos' %}">
+          <input type="search" name="buscar" placeholder="Buscar producto..." value="{{ buscar }}" id="input-buscar"
+            style="width:200px; border-radius:6px;">
+        </form>
+      </li>
+
+      {% if not user.is_authenticated %}
+      <!-- USUARIO NO LOGEADO -->
+      <li style="margin-left:10px;">
+        <a href="{% url 'login' %}" class="button small">Ingresar</a>
+      </li>
+      <li style="margin-left:5px;">
+        <a href="{% url 'registro' %}" class="button small secondary">Registrarse</a>
+      </li>
+
+      {% else %}
+      <!-- USUARIO LOGEADO -->
+      <li style="margin-left:10px; color:white;">
+        👤 Hola, {{ user.username }}
+      </li>
+
+      <li style="margin-left:10px;">
+        <a href="{% url 'logout' %}" class="button alert small">
+          Cerrar sesión
+        </a>
+      </li>
+      {% endif %}
+
+    </ul>
+  </div>
+</div>
+
+<!-- BUSCADOR AUTOMÁTICO -->
+<script>
+  let timeout = null;
+  const input = document.getElementById('input-buscar');
+
+  if (input) {
+    input.addEventListener('input', function () {
+      clearTimeout(timeout);
+      timeout = setTimeout(() => {
+        document.getElementById('form-buscar').submit();
+      }, 800);
+    });
+  }
+</script>

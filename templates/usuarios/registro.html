@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Registro{% endblock %}
+
+{% block content %}
+<div class="grid-container" style="padding-top:40px; padding-bottom:60px; max-width:550px;">
+
+    <!-- MIGA / TÍTULO -->
+    <div class="categoria-bar" style="margin-bottom:25px; text-align:center;">
+        <span class="categoria-pill active">📝 Registro de usuario</span>
+    </div>
+
+    <div class="card">
+        <div class="card-section">
+
+            <h3 class="text-center">📝 Crear cuenta</h3>
+            <p class="text-center" style="color:#666;">
+                Regístrate para comenzar a comprar en AgroFull.
+            </p>
+
+            <!-- ERRORES DEL FORMULARIO -->
+            {% if form.errors %}
+                <div class="callout alert">
+                    <strong>Corrige los siguientes errores:</strong>
+                    <ul>
+                        {% for field in form %}
+                            {% for error in field.errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        {% endfor %}
+                        {% for error in form.non_field_errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+
+            <!-- FORMULARIO -->
+            <form method="post">
+                {% csrf_token %}
+
+                <label>Usuario</label>
+                {{ form.username }}
+
+                <label>Nombre</label>
+                {{ form.first_name }}
+
+                <label>Apellido</label>
+                {{ form.last_name }}
+
+                <label>Email</label>
+                {{ form.email }}
+
+                <label>Contraseña</label>
+                {{ form.password1 }}
+
+                <label>Repetir contraseña</label>
+                {{ form.password2 }}
+
+                <button type="submit" class="button success expanded" style="margin-top:20px;">
+                    Crear cuenta
+                </button>
+            </form>
+
+            <hr>
+
+            <p class="text-center">
+                ¿Ya tienes cuenta?<br>
+                <a href="{% url 'login' %}" class="button primary small">
+                    Iniciar sesión
+                </a>
+            </p>
+
+        </div>
+    </div>
+
+</div>
+{% endblock %}

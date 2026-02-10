@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Agro Full{% endblock title %}</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Foundation CSS -->
+    <link rel="stylesheet" href="{% static 'css/foundation.min.css' %}">
+
+    <!-- CSS personalizado global -->
+    <link rel="stylesheet" href="{% static 'css/app.css' %}">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    {% block head_extra %}{% endblock head_extra %}
+</head>
+
+<body>
+
+    {% include 'includes/head.html' %}
+
+    {% block full_width %}{% endblock full_width %}
+
+    <main class="grid-container" style="min-height: 70vh;">
+        {% block content %}{% endblock content %}
+    </main>
+
+    {% include 'includes/footer.html' %}
+
+
+    <!-- jQuery -->
+    <script src="{% static 'js/vendor/jquery.js' %}"></script>
+
+    <!-- What Input -->
+    <script src="{% static 'js/vendor/what-input.js' %}"></script>
+
+    <!-- Foundation JS -->
+    <script src="{% static 'js/vendor/foundation.min.js' %}"></script>
+
+    <!-- Inicializar Foundation -->
+    <script>
+        $(document).foundation();
+    </script>
+
+    <!-- JS personalizado global -->
+    <script src="{% static 'js/app.js' %}"></script>
+
+    {% block scripts %}{% endblock scripts %}
+</body>
+
+</html>

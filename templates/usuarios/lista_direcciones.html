@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block title %}Mis Direcciones{% endblock %}
+
+{% block content %}
+<div class="grid-container" style="padding-top:40px; padding-bottom:60px; max-width: 900px;">
+
+    <h1 class="text-center">📍 Mis Direcciones</h1>
+
+    {% if direcciones %}
+        <div class="grid-x grid-margin-x small-up-1 medium-up-2">
+
+            {% for direccion in direcciones %}
+            <div class="cell">
+                <div class="card {% if direccion.principal %}callout success{% endif %}">
+                    <div class="card-section">
+
+                        {% if direccion.principal %}
+                            <span class="label success">Dirección Principal</span>
+                            <br><br>
+                        {% endif %}
+
+                        <p><strong>Nombre:</strong> {{ direccion.nombre }}</p>
+                        <p><strong>Dirección:</strong> {{ direccion.calle }} #{{ direccion.numero }}</p>
+                        <p><strong>Comuna:</strong> {{ direccion.comuna }}</p>
+                        <p><strong>Ciudad:</strong> {{ direccion.ciudad }}</p>
+
+                        {% if direccion.referencia %}
+                            <p><strong>Referencia:</strong> {{ direccion.referencia }}</p>
+                        {% endif %}
+
+                        <div class="grid-x grid-margin-x" style="margin-top: 15px;">
+                            <div class="small-6 cell">
+                                <a href="{% url 'editar_direccion' direccion.id %}" class="button warning small expanded">
+                                    ✏️ Editar
+                                </a>
+                            </div>
+
+                            <div class="small-6 cell">
+                                <a href="{% url 'borrar_direccion' direccion.id %}" class="button alert small expanded">
+                                    🗑 Eliminar
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+    {% else %}
+        <div class="callout warning text-center">
+            Aún no tienes direcciones registradas.
+        </div>
+    {% endif %}
+
+    <div class="text-center" style="margin-top:40px;">
+        <a href="{% url 'crear_direccion' %}" class="button success large">
+            ➕ Agregar nueva dirección
+        </a>
+    </div>
+
+</div>
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends "core/base.html" %}
+{% block content %}
+
+<h2 class="text-center fw-bold text-success mb-4">Productos Frescos 🍉🥕</h2>
+
+<div class="row">
+    {% for producto in productos %}
+        <div class="col-md-4 mb-4">
+            <div class="card shadow border-0">
+
+                {% if producto.imagen %}
+                    <img src="{{ producto.imagen.url }}" class="card-img-top" style="height: 220px; object-fit: cover;">
+                {% else %}
+                    <img src="https://via.placeholder.com/300x220?text=Sin+Imagen" class="card-img-top">
+                {% endif %}
+
+                <div class="card-body">
+                    <h5 class="fw-bold">{{ producto.nombre }}</h5>
+                    <p class="text-muted">{{ producto.descripcion|truncatewords:12 }}</p>
+
+                    <p class="fw-bold text-success fs-5">${{ producto.precio }}</p>
+
+                    <a href="{% url 'agregar_carrito' producto.id %}" class="btn btn-success w-100">
+                        🛒 Agregar al carrito
+                    </a>
+                </div>
+            </div>
+        </div>
+    {% empty %}
+        <p class="text-center text-muted">No hay productos disponibles 😢</p>
+    {% endfor %}
+</div>
+
+{% endblock %}

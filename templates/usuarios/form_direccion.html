@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}Dirección{% endblock %}
+
+{% block content %}
+<div class="grid-container" style="max-width: 600px; padding-top: 40px; padding-bottom: 60px;">
+
+    <h3 class="text-center">📍 Dirección</h3>
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="callout success">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+
+    <form method="post">
+        {% csrf_token %}
+
+        <label>Nombre de identificación</label>
+        {{ form.nombre }}
+
+        <label>Calle</label>
+        {{ form.calle }}
+
+        <label>Número</label>
+        {{ form.numero }}
+
+        <label>Comuna</label>
+        {{ form.comuna }}
+
+        <label>Ciudad</label>
+        {{ form.ciudad }}
+
+        <label>Referencia</label>
+        {{ form.referencia }}
+
+        <label class="inline">¿Dirección principal?</label>
+        {{ form.principal }}
+
+        <button type="submit" class="button success expanded" style="margin-top:20px;">
+            💾 Guardar dirección
+        </button>
+    </form>
+
+    <a href="{% url 'lista_direcciones' %}" class="button secondary expanded" style="margin-top:10px;">
+        ⬅️ Volver
+    </a>
+
+</div>
+{% endblock %}

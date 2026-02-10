@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Productos{% endblock %}
+
+{% block head_extra %}
+<link rel="stylesheet" href="{% static 'css/products.css' %}">
+{% endblock head_extra %}
+
+{% block content %}
+<div class="grid-container" style="padding-top:20px; padding-bottom:40px;">
+
+    <!-- TÍTULO PRINCIPAL -->
+    <h1 class="text-center">
+        {% if categoria_nombre %}
+            {{ categoria_nombre }}
+        {% elif buscar %}
+            Resultados para "{{ buscar }}"
+        {% else %}
+            Productos disponibles
+        {% endif %}
+    </h1>
+
+    <!-- BARRA DE CATEGORÍAS -->
+    {% if not buscar %}
+    <div class="categoria-bar text-center" style="margin-bottom: 25px;">
+        <a href="{% url 'lista_productos' %}"
+           class="categoria-pill {% if not categoria_nombre %}active{% endif %}">
+            Todos
+        </a>
+
+        {% for categoria in categorias %}
+        <a href="{% url 'productos_por_categoria' categoria.id %}"
+           class="categoria-pill {% if categoria.nombre == categoria_nombre %}active{% endif %}">
+            {{ categoria.nombre }}
+        </a>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <!-- LISTADO POR CATEGORÍA -->
+    {% for categoria in categorias %}
+        {% if not buscar and not categoria_nombre %}
+            <h2 class="text-center" style="margin-top: 40px;">{{ categoria.nombre }}</h2>
+        {% endif %}
+
+        <div class="grid-x grid-margin-x small-up-1 medium-up-2 large-up-4">
+
+            {% for producto in productos %}
+                {% if producto.categoria == categoria %}
+                <div class="cell">
+                    <div class="card producto-card">
+
+                        {% if producto.imagen %}
+                            <img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}">
+                        {% else %}
+                            <div class="sin-imagen">Sin imagen</div>
+                        {% endif %}
+
+                        <div class="card-section text-center">
+                            <h4>{{ producto.nombre }}</h4>
+
+                            <p class="unidad-texto">
+                                Venta por: <strong>{{ producto.unidad }}</strong>
+                            </p>
+
+                            <div class="grid-x grid-padding-x align-middle">
+                                <div class="small-6 cell">
+                                    <input type="number"
+                                           min="1"
+                                           value="1"
+                                           class="cantidad-input"
+                                           id="cantidad-{{ producto.id }}">
+                                </div>
+
+                                <div class="small-6 cell">
+                                    <button type="button"
+                                            class="button success expanded btn-agregar"
+                                            data-producto="{{ producto.nombre }}"
+                                            data-id="{{ producto.id }}">
+                                        <i class="fas fa-cart-plus"></i> Agregar
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+            {% endfor %}
+
+        </div>
+    {% endfor %}
+
+</div>
+{% endblock content %}
+
+{% block scripts %}
+<script src="{% static 'js/products.js' %}"></script>
+{% endblock scripts %}

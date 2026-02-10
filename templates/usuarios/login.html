@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Iniciar sesión{% endblock %}
+
+{% block content %}
+<div class="grid-container" style="padding-top:40px; padding-bottom:60px; max-width:500px;">
+
+    <!-- Título / Miga -->
+    <div class="categoria-bar" style="margin-bottom:25px; text-align:center;">
+        <span class="categoria-pill active">🔐 Iniciar sesión</span>
+    </div>
+
+    <div class="card">
+        <div class="card-section">
+
+            <h3 class="text-center">🔐 Acceso de usuarios</h3>
+            <p class="text-center" style="color:#666;">
+                Ingresa con tu cuenta para realizar pedidos.
+            </p>
+
+            <!-- Mostrar errores si hay -->
+            {% if form.errors %}
+                <div class="callout alert">
+                    <strong>Error:</strong>
+                    <ul>
+                        {% for field in form %}
+                            {% for error in field.errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        {% endfor %}
+                        {% for error in form.non_field_errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+
+            <!-- Formulario -->
+            <form method="post">
+                {% csrf_token %}
+
+                <label>Usuario</label>
+                {{ form.username }}
+
+                <label>Contraseña</label>
+                {{ form.password }}
+
+                <button type="submit" class="button success expanded" style="margin-top:20px;">
+                    Ingresar
+                </button>
+            </form>
+
+            <hr>
+
+            <p class="text-center">
+                ¿No tienes cuenta?<br>
+                <a href="{% url 'registro' %}" class="button secondary small">
+                    Registrarse
+                </a>
+            </p>
+
+        </div>
+    </div>
+
+</div>
+{% endblock %}

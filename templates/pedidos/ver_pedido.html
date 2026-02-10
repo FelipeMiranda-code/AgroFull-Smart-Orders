@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Tu pedido{% endblock title %}
+
+{% block head_extra %}
+<link rel="stylesheet" href="{% static 'css/products.css' %}">
+{% endblock head_extra %}
+
+{% block content %}
+<div class="grid-container" style="padding-top:20px; padding-bottom:40px;">
+
+    <!-- ✅ MIGA DE PAN -->
+    <div class="categoria-bar" style="margin-bottom:25px;">
+        <a href="{% url 'inicio' %}" class="categoria-pill">Inicio</a>
+        <a href="{% url 'mis_pedidos' %}" class="categoria-pill">Mis pedidos</a>
+        <span class="categoria-pill active">Ver pedido</span>
+    </div>
+
+    <h2 class="text-center">🛒 Tu pedido actual</h2>
+
+    {% if pedido %}
+        <div class="grid-x grid-margin-x small-up-1 medium-up-2 large-up-3">
+
+            {% for item in detalles %}
+            <div class="cell">
+                <div class="card producto-card">
+
+                    {% if item.producto.imagen %}
+                        <img src="{{ item.producto.imagen.url }}" alt="{{ item.producto.nombre }}">
+                    {% else %}
+                        <div class="sin-imagen">Sin imagen</div>
+                    {% endif %}
+
+                    <div class="card-section text-center">
+                        <h4>{{ item.producto.nombre }}</h4>
+
+                        <div class="grid-x grid-padding-x align-middle" style="margin-top:12px;">
+
+                            <!-- ACTUALIZAR -->
+                            <div class="small-6 cell">
+                                <form action="{% url 'actualizar_cantidad' item.id %}" method="post"
+                                      style="display:flex; gap:6px; justify-content:center;">
+                                    {% csrf_token %}
+                                    <input type="number" name="cantidad" min="0"
+                                           value="{{ item.cantidad }}" class="cantidad-input" style="max-width:90px;">
+                                    <button type="submit" class="button small success">Actualizar</button>
+                                </form>
+                            </div>
+
+                            <!-- ELIMINAR -->
+                            <div class="small-6 cell">
+                                <form action="{% url 'eliminar_item' item.id %}" method="post">
+                                    {% csrf_token %}
+                                    <button type="submit" class="button alert small expanded">Eliminar</button>
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+
+        <!-- ✅ RESUMEN -->
+        <div class="callout success" style="margin-top:30px; text-align:right;">
+            <strong>Total de ítems:</strong> {{ total_cantidad }}
+        </div>
+
+        <!-- ✅ SELECCIÓN DE DIRECCIÓN + CONFIRMAR -->
+        <div style="margin-top:25px;">
+            <form action="{% url 'confirmar_pedido' %}" method="post">
+                {% csrf_token %}
+
+                <h4>📍 Dirección de entrega</h4>
+
+                {% if request.user.direcciones.all %}
+                    {% for d in request.user.direcciones.all %}
+                        <label style="display:block; margin-bottom:6px;">
+                            <input type="radio" name="direccion_id" value="{{ d.id }}"
+                                   {% if d.principal %}checked{% endif %}>
+                            {{ d.calle }} {{ d.numero }} - {{ d.comuna }} {% if d.principal %}(Principal){% endif %}
+                        </label>
+                    {% endfor %}
+                    <p>
+                        <a href="{% url 'crear_direccion' %}?next=pedido" class="button small">
+                            ➕ Agregar nueva dirección
+                        </a>
+                    </p>
+                {% else %}
+                    <p>No tienes direcciones guardadas.
+                        <a href="{% url 'crear_direccion' %}?next=pedido">Crear una ahora</a>
+                    </p>
+                {% endif %}
+
+                <button type="submit" class="button success large expanded">
+                    ✅ Confirmar pedido
+                </button>
+            </form>
+        </div>
+
+    {% else %}
+        <div class="callout warning text-center">
+            No tienes productos en tu pedido.
+        </div>
+    {% endif %}
+
+</div>
+{% endblock content %}
